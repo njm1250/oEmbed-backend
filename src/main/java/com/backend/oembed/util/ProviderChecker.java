@@ -1,5 +1,8 @@
 package com.backend.oembed.util;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ProviderChecker {
 
     public String checkProvider(String host) {

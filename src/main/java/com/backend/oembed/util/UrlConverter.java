@@ -1,11 +1,17 @@
 package com.backend.oembed.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
+@Component
 public class UrlConverter {
 
-    private ProviderChecker providerChecker = new ProviderChecker();
+    @Autowired
+    private ProviderChecker providerChecker;
+
 
     public String getConvertedUrl(String url) throws MalformedURLException {
         URL host = new URL(url);

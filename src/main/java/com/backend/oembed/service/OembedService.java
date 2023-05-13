@@ -6,6 +6,8 @@ import org.apache.tomcat.util.json.JSONParser;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -15,9 +17,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 @Service
+@Component
 public class OembedService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
     private final UrlConverter urlConverter = new UrlConverter();
+    @Autowired
     private final UnicodeDecoder unicodeDecoder = new UnicodeDecoder();
 
 
@@ -25,6 +31,7 @@ public class OembedService {
         logger.info("STARTED...");
         String convURL = urlConverter.getConvertedUrl(url);
         logger.info("Converted URL : {}", convURL);
+
         StringBuffer sb = new StringBuffer();
         URL uri = new URL(convURL);
         HttpURLConnection con = (HttpURLConnection) uri.openConnection();
@@ -40,7 +47,8 @@ public class OembedService {
         }catch(Exception e) {
             e.printStackTrace();
         }
-        String jsonStr = unicodeDecoder.UniToKor(sb.toString());
+
+        String jsonStr = unicodeDecoder.UniToKor(sb.toString()); // 유니코드 한글깨짐 현상
         //JSONObject json = new JSONObject(jsonStr);
         logger.info("return value : {}", jsonStr);
         return jsonStr;

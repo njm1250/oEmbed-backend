@@ -1,5 +1,8 @@
 package com.backend.oembed.util;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class UnicodeDecoder {
     public String UniToKor(String uni){
         StringBuffer result = new StringBuffer();
