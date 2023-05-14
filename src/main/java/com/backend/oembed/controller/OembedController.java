@@ -24,17 +24,21 @@ public class OembedController {
         this.oembedService = oembedService;
     }
 
+    @GetMapping("")
+    @ResponseBody
+    public String main() {
+        return "localhost:8080/oembed로 들어가주세요";
+    }
+
     @GetMapping("/oembed")
     public String oembed() {
         return "oembed";
     }
 
-
     @GetMapping("/response")
     @ResponseBody
-    public String response(@RequestParam("url") String url) throws IOException {
+    public String response(@RequestParam("url") String url) throws IOException, InterruptedException {
         String result = oembedService.getAPIData(url);
-        System.out.println(result);
         return result;
     }
 
