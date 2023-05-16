@@ -11,27 +11,27 @@ import java.net.URL;
 @Component
 public class UrlConverter {
 
-    @Autowired
     private ProviderChecker providerChecker;
-
     private final OembedProviderService oembedProviderService;
 
     @Autowired
-    public UrlConverter(OembedProviderService oembedProviderService) {
+    public UrlConverter(ProviderChecker providerChecker, OembedProviderService oembedProviderService) {
+        this.providerChecker = providerChecker;
         this.oembedProviderService = oembedProviderService;
     }
 
     public String getConvertedUrl(String url) throws IOException {
         URL host = new URL(url);
         String getHost = host.getHost();
-        String provider = providerChecker.checkProvider(getHost);
+        String provider = providerChecker.getProviderName(getHost);
         String convUrl = oembedProviderService.getOembedApiUrl(provider) + "?url=";
         String tempURL = url
                 .replace(":", "%3A")
                 .replace("?", "%3F")
                 .replace("=", "%3D")
                 .replace("www.", "");
-        if (provider.contains("vimeo")) {
+        if(provider == null) return null;
+        else if (provider.contains("vimeo")) {
             String vimeoApiUrl = "https://vimeo.com/api/oembed.json?url=";
             convUrl = vimeoApiUrl + tempURL;
         }

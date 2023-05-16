@@ -11,7 +11,8 @@ import java.io.FileReader;
 @Component
 public class ProviderChecker {
 
-    public String checkProvider(String host) {
+    // host받아서 provider_name
+    public String getProviderName(String host) {
         if(host.contains("youtu")) return "youtube";
         else if(host.contains("vimeo")) return "vimeo";
         else if(host.contains("twitter")) return "twitter";

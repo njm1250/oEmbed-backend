@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class JsonConverter {
 
+
+    // Youtube html 특수문자 escaper
     public String youtubeHtmlEscaper(String JsonStr) {
         String result = "";
         String[] escape = JsonStr.split("\"html\":\"");

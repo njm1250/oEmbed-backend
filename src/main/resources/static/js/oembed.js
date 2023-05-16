@@ -5,7 +5,6 @@ function requestUrl() {
      const apiUrl = document.getElementById('search').value;
      fetch("/response?url="+ apiUrl)
             .then((resolvedData) => {
-
                 resolvedData.json()
                     .then((json) =>{
                         const render = document.getElementById('responseDataInContainer');
@@ -75,7 +74,7 @@ function requestUrl() {
                     })
             })
             .catch((err) => {
-                alert('유요하지 않은 주소입니다. 만약 Vimeo라면 다시 시도해주세요.');
+                alert('유요하지 않은 주소입니다.');
                 console.log(err);
             });
 

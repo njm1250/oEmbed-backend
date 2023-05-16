@@ -16,10 +16,10 @@ import java.io.IOException;
 @Controller
 public class OembedController {
 
-    @Autowired
+
     private final OembedService oembedService;
 
-
+    @Autowired
     public OembedController(OembedService oembedService) {
         this.oembedService = oembedService;
     }

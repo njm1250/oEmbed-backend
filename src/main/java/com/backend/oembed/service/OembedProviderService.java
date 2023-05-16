@@ -22,21 +22,21 @@ public class OembedProviderService {
     }
 
     public String getOembedApiUrl(String providerName) throws IOException {
-        // provider.json 파일 읽기
+        // resources/providers/provider.json 파일 읽기
         ClassPathResource resource = new ClassPathResource("providers/provider.json");
         InputStream inputStream = resource.getInputStream();
         Reader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-        // JSON 파일 파싱하기
+        // JSON 파싱
         JsonArray jsonArray = gson.fromJson(reader, JsonArray.class);
 
-        // provider_name과 일치하는 url찾기
+        // provider_name 과 일치하는 url 찾기
         for (JsonElement element : jsonArray) {
             JsonObject jsonObject = element.getAsJsonObject();
             String currentProviderName = jsonObject.get("provider_name").getAsString();
             if (currentProviderName.equalsIgnoreCase(providerName)) {
                 JsonArray endpoints = jsonObject.getAsJsonArray("endpoints");
                 for (JsonElement endpoint : endpoints) {
-                    String oembedUrl = endpoint.getAsJsonObject().getAsJsonPrimitive("url").getAsString(); // sonElement String으로 가져오기
+                    String oembedUrl = endpoint.getAsJsonObject().getAsJsonPrimitive("url").getAsString(); // JsonElement String 으로 가져오기
                     return oembedUrl;
                 }
             }
