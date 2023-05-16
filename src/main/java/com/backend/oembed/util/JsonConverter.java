@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JsonConverter {
 
-    public String JsonEscaper(String JsonStr) {
+    public String youtubeHtmlEscaper(String JsonStr) {
         String result = "";
         String[] escape = JsonStr.split("\"html\":\"");
         escape[1] = escape[1].replace("\"", "\\\"");

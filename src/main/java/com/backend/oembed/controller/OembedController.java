@@ -37,7 +37,7 @@ public class OembedController {
 
     @GetMapping("/response")
     @ResponseBody
-    public String response(@RequestParam("url") String url) throws IOException, InterruptedException {
+    public String response(@RequestParam("url") String url) throws Exception {
         String result = oembedService.getAPIData(url);
         return result;
     }
